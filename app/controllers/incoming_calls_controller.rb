@@ -81,7 +81,7 @@ class IncomingCallsController < ApplicationController
     respond_to do |format|
       if player.save
         logger.info "Incoming call received"
-        format.xml  { render :xml => verb.response, :status => 400 } # , :status => :created
+        format.xml  { render :xml => verb.response } # , :status => :created
       else
         logger.info "Incoming call error"
         format.xml  { render :xml => player.errors, :status => :unprocessable_entity }
