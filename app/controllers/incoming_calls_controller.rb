@@ -28,7 +28,7 @@ class IncomingCallsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => verb.response }
+      format.xml  { render :xml => @incoming_calls }
     end
   end
 
@@ -80,8 +80,10 @@ class IncomingCallsController < ApplicationController
 
     respond_to do |format|
       if player.save
-        format.xml  { render :xml => verb, :status => :created }
+        logger.info "Incoming call received"
+        format.xml  { render :xml => verb.response, :status => :created }
       else
+        logger.info "Incoming call error"
         format.xml  { render :xml => player.errors, :status => :unprocessable_entity }
       end
     end
