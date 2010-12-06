@@ -3,7 +3,11 @@ Phonesystem::Application.routes.draw do
 
   resources :players
 
-  resources :games
+  resources :games do
+    member do
+      post :gather
+    end
+  end
 
   resources :incoming_texts
 
