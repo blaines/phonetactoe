@@ -72,7 +72,7 @@ class IncomingCallsController < ApplicationController
     player.game = game
     player.save
     verb = Twilio::Verb.new { |v|
-        v.gather(:action => '/game_turn_path', :method => 'POST', :timeout => "90") {
+        v.gather(:action => '/game_turn_path', :method => 'POST', :timeout => "90", :numdigits => 1) {
           v.say 'Pick a position'
         }
         v.say "We didn't receive any input. Goodbye!"
