@@ -7,6 +7,7 @@ class IncomingCallsController < ApplicationController
     # Create Player
     # Available Game?
     # Create if none avail
+    # wait for other player
     # goto game
     # Take turns
     # game fin
