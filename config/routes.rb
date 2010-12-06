@@ -1,4 +1,6 @@
 Phonesystem::Application.routes.draw do
+  resources :turns
+
   resources :players
 
   resources :games

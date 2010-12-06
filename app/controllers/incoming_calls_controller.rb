@@ -66,6 +66,7 @@ class IncomingCallsController < ApplicationController
     game = Game.find(:conditions => {:available => true})
     unless game
       game = Game.new
+      game.save
     end
     player = Player.find_or_create_by(:phone_number => params[:From].to_i)
     player.caller = params[:Caller]
