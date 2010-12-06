@@ -1,0 +1,2 @@
+module IncomingTextsHelper
+end

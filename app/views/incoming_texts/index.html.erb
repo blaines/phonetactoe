@@ -1,0 +1,21 @@
+<h1>Listing incoming_texts</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @incoming_texts.each do |incoming_text| %>
+  <tr>
+    <td><%= link_to 'Show', incoming_text %></td>
+    <td><%= link_to 'Edit', edit_incoming_text_path(incoming_text) %></td>
+    <td><%= link_to 'Destroy', incoming_text, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Incoming text', new_incoming_text_path %>

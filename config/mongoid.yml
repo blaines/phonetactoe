@@ -1,0 +1,18 @@
+defaults: &defaults
+  host: flame.local.mongohq.com
+  port: 27019
+  username: mongoapp
+  password: 142963
+  database: phonesystem-p
+  
+development:
+  <<: *defaults
+  database: phonesystem-p
+
+test:
+  <<: *defaults
+  database: phonesystem-p
+  
+production:
+  <<: *defaults
+  database: phonesystem-p
