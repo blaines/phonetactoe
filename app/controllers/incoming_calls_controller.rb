@@ -66,7 +66,8 @@ class IncomingCallsController < ApplicationController
     game = Game.first(:conditions => {:available => true})
     if game
       if game.players == 2
-      game.available = false
+        game.available = false
+      end
       # game.start
     else
       game = Game.new
