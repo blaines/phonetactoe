@@ -1,4 +1,8 @@
 Phonesystem::Application.routes.draw do
+  resources :players
+
+  resources :games
+
   resources :incoming_texts
 
   resources :incoming_calls

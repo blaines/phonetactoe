@@ -40,6 +40,7 @@ class IncomingTextsController < ApplicationController
   # POST /incoming_texts
   # POST /incoming_texts.xml
   def create
+    # {"ToState"=>"IL", "FromState"=>"AZ", "AccountSid"=>"AC1afaeecf73a8e05e32c695eac213226c", "SmsMessageSid"=>"SM8a1e2f65484fa1bd45b6a37d72a145fe", "Body"=>"youre an idiot sometimes", "From"=>"+16234556356", "FromCity"=>"PHOENIX", "SmsStatus"=>"received", "FromZip"=>"85065", "FromCountry"=>"US", "To"=>"+18152165378", "ToCity"=>"KANKAKEE", "ToZip"=>"60914", "ToCountry"=>"US", "ApiVersion"=>"2010-04-01", "SmsSid"=>"SM8a1e2f65484fa1bd45b6a37d72a145fe"}
     @incoming_text = IncomingText.new(params[:incoming_text])
 
     respond_to do |format|
