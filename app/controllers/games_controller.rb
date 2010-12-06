@@ -74,8 +74,10 @@ class GamesController < ApplicationController
     game = player.game
     # game = @game = Game.find(params[:id])
     verb = Twilio::Verb.new { |v|
-          v.say 'Digit accepted'
+          v.say params["Digits"]
     }
+    
+    game.spaces[params["Digits"]] = true
 
     respond_to do |format|
       if player.save

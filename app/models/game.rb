@@ -10,6 +10,17 @@ class Game
     self.spaces = {"1" => nil, "2" => nil, "3" => nil, "4" => nil, "5" => nil, "6" => nil, "7" => nil, "8" => nil, "9" => nil}
   end
   
+  def space(i)
+    case self.spaces[i.to_s]
+    when nil
+      "-"
+    when true
+      "X"
+    when false
+      "O"
+    end
+  end
+  
   def purgatory
     self.active = true
     self.available = true
