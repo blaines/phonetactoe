@@ -77,6 +77,15 @@ class IncomingCallsController < ApplicationController
         }
         v.say "We didn't receive any input. Goodbye!"
     }
+
+    respond_to do |format|
+      if player.save
+        format.xml  { render :xml => verb, :status => :created }
+      else
+        format.xml  { render :xml => player.errors, :status => :unprocessable_entity }
+      end
+    end
+
     
     # @incoming_call = IncomingCall.new(params[:incoming_call])
     # 
