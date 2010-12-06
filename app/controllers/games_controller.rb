@@ -56,13 +56,23 @@ class GamesController < ApplicationController
   # PUT /games/1
   # PUT /games/1.xml
   def update
+    @game = Game.find(params[:id])
+    
+    respond_to do |format|
+      if @game.update_attributes(params[:game])
+        format.html { redirect_to(@game, :notice => 'Game was successfully updated.') }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @game.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+  
+  def gather
     player = Player.first(:conditions => {:phone_number => params[:From].to_i})
     game = player.game
     # game = @game = Game.find(params[:id])
-    
-    
-    
-    
     verb = Twilio::Verb.new { |v|
           v.say 'Digit accepted'
     }
@@ -78,19 +88,6 @@ class GamesController < ApplicationController
         format.xml  { render :xml => player.errors, :status => :unprocessable_entity }
       end
     end
-
-
-    # @game = Game.find(params[:id])
-    # 
-    # respond_to do |format|
-    #   if @game.update_attributes(params[:game])
-    #     format.html { redirect_to(@game, :notice => 'Game was successfully updated.') }
-    #     format.xml  { head :ok }
-    #   else
-    #     format.html { render :action => "edit" }
-    #     format.xml  { render :xml => @game.errors, :status => :unprocessable_entity }
-    #   end
-    # end
   end
 
   # DELETE /games/1
