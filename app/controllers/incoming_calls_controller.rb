@@ -62,21 +62,25 @@ class IncomingCallsController < ApplicationController
   # POST /incoming_calls
   # POST /incoming_calls.xml
   def create
+
+    player = Player.find_or_create_by(:phone_number => params[:From].to_i)
+    player.caller = params[:Caller]
+    player.save
     
     game = Game.first(:conditions => {:available => true})
+    player.game = game
     if game
+      game.player_two = player.id
       if game.players == 2
         game.start
       end
     else
       game = Game.new
       game.setup
+      game.player_one = player.id
       game.available = true
     end
     game.save
-    player = Player.find_or_create_by(:phone_number => params[:From].to_i)
-    player.caller = params[:Caller]
-    player.game = game
     player.save
     verb = Twilio::Verb.new { |v|
         v.gather(:action => "/games/#{game.id}/gather.xml", :method => 'POST', :timeout => "90", :numDigits => 1) {

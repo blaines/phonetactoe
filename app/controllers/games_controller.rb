@@ -78,10 +78,11 @@ class GamesController < ApplicationController
     }
     
     game.spaces[params["Digits"]] = true
-    game.save
+    
+    game.spaces[params["Digits"]] = false
 
     respond_to do |format|
-      if player.save
+      if game.save
         logger.info "Game updated"
         format.html { redirect_to(@game, :notice => 'Game was successfully updated.') }
         format.xml  { render :xml => verb.response } # , :status => :created

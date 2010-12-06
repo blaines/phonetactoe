@@ -3,6 +3,8 @@ class Game
   field :available, :type => Boolean
   field :active, :type => Boolean
   field :spaces, :type => Hash
+  field :player_one
+  field :player_two
   references_many :players
   embeds_many :turns
   
