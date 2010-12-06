@@ -64,10 +64,15 @@ class IncomingCallsController < ApplicationController
   def create
     
     game = Game.first(:conditions => {:available => true})
-    unless game
+    if game
+      if game.players == 2
+      game.available = false
+      # game.start
+    else
       game = Game.new
-      game.save
+      game.available = true
     end
+    game.save
     player = Player.find_or_create_by(:phone_number => params[:From].to_i)
     player.caller = params[:Caller]
     player.game = game
