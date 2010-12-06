@@ -66,9 +66,8 @@ class IncomingCallsController < ApplicationController
     game = Game.first(:conditions => {:available => true})
     if game
       if game.players == 2
-        game.available = false
+        game.start
       end
-      # game.start
     else
       game = Game.new
       game.available = true
@@ -79,7 +78,7 @@ class IncomingCallsController < ApplicationController
     player.game = game
     player.save
     verb = Twilio::Verb.new { |v|
-        v.gather(:action => '/game_turn_path', :method => 'POST', :timeout => "90", :numDigits => 1) {
+        v.gather(:action => "/games/#{game.id}", :method => 'POST', :timeout => "90", :numDigits => 1) {
           v.say 'Pick a position'
         }
         v.say "We didn't receive any input. Goodbye!"
