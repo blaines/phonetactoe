@@ -70,6 +70,7 @@ class IncomingCallsController < ApplicationController
       end
     else
       game = Game.new
+      game.setup
       game.available = true
     end
     game.save
