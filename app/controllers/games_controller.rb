@@ -78,6 +78,7 @@ class GamesController < ApplicationController
     }
     
     game.spaces[params["Digits"]] = true
+    game.save
 
     respond_to do |format|
       if player.save
