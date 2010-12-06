@@ -63,7 +63,7 @@ class IncomingCallsController < ApplicationController
   # POST /incoming_calls.xml
   def create
     
-    game = Game.find(:conditions => {:available => true})
+    game = Game.first(:conditions => {:available => true})
     unless game
       game = Game.new
       game.save
