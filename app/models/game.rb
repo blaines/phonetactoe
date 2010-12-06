@@ -7,7 +7,7 @@ class Game
   embeds_many :turns
   
   def setup
-    self.spaces = {"1" => false, "2" => false, "3" => false, "4" => false, "5" => false, "6" => false, "7" => false, "8" => false, "9" => false}
+    self.spaces = {"1" => nil, "2" => nil, "3" => nil, "4" => nil, "5" => nil, "6" => nil, "7" => nil, "8" => nil, "9" => nil}
   end
   
   def purgatory
