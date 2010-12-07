@@ -53,5 +53,12 @@ class Game
     else
       true
     end
+    
+    self.players.each {|e| e.game = nil}
+    
+  end
+  
+  def over?
+    false
   end
 end
