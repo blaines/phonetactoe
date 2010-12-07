@@ -2,6 +2,7 @@ class Game
   include Mongoid::Document
   field :available, :type => Boolean
   field :active, :type => Boolean
+  field :turn, :type => Boolean
   field :spaces, :type => Hash
   field :player_one
   field :player_two
@@ -10,6 +11,7 @@ class Game
   
   def setup
     self.spaces = {"1" => nil, "2" => nil, "3" => nil, "4" => nil, "5" => nil, "6" => nil, "7" => nil, "8" => nil, "9" => nil}
+    self.turn = true
     self.purgatory
   end
   
@@ -21,6 +23,14 @@ class Game
       "X"
     when false
       "O"
+    end
+  end
+  
+  def next_turn
+    if self.turn
+      self.turn=false
+    else
+      self.turn=true
     end
   end
   
