@@ -50,6 +50,7 @@ class Game
     two.game = nil
     self.active = false
     self.available = false
+    true
   end
   def finished?
     if active && available
@@ -57,9 +58,6 @@ class Game
     else
       true
     end
-    
-    self.players.each {|e| e.game = nil}
-    
   end
   
   def over?
@@ -111,7 +109,7 @@ class Game
         self.spaces["1"] == true && self.spaces["5"] == true && self.spaces["9"] == true ||
         self.spaces["7"] == true && self.spaces["5"] == true && self.spaces["3"] == true
         
-        self.players.find(self.player_one)
+        Player.find(self.player_one)
       when
         self.spaces["1"] == false && self.spaces["2"] == false && self.spaces["3"] == false ||
         self.spaces["4"] == false && self.spaces["5"] == false && self.spaces["6"] == false ||
@@ -124,7 +122,7 @@ class Game
         self.spaces["1"] == false && self.spaces["5"] == false && self.spaces["9"] == false ||
         self.spaces["7"] == false && self.spaces["5"] == false && self.spaces["3"] == false
 
-        self.players.find(self.player_two)
+        Player.find(self.player_two)
       when self.spaces.has_value?(nil) == false
         nil
       end
