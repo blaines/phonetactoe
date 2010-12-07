@@ -94,12 +94,7 @@ class IncomingCallsController < ApplicationController
     end
     game.save
     player.save
-    verb = Twilio::Verb.new { |v|
-        v.gather(:action => "/games/#{game.id}/gather.xml", :method => 'POST', :timeout => "90", :numDigits => 1) {
-          v.say 'Pick a position'
-        }
-        v.say "We didn't receive any input. Goodbye!"
-    }
+    v.redirect "/games/#{game.id}/gather.xml"
     
     respond_to do |format|
       if player.save
