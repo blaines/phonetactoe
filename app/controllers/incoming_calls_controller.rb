@@ -67,14 +67,18 @@ class IncomingCallsController < ApplicationController
     player.caller = params[:Caller]
     player.save
     
-    game = Game.first(:conditions => {:available => true})
+    if player.game
+      game = player.game
+    else
+      game = Game.first(:conditions => {:available => true})
+    end
+    
     if game
       player.game = game
-      game.save
-      if game.players.count == 2
-        game.player_two = player.id
-        game.start
-      end
+      logger.info("#{player.game.players.count}")
+      puts "Player count: #{player.game.players.count}"
+      game.player_two = player.id
+      game.start
     else
       game = Game.new
       game.setup

@@ -9,6 +9,7 @@
 
 <% @games.each do |game| %>
   <tr>
+	<td><%= render :partial => 'game', :locals => {:game => game} %></td>
     <td><%= link_to 'Show', game %></td>
     <td><%= link_to 'Edit', edit_game_path(game) %></td>
     <td><%= link_to 'Destroy', game, :confirm => 'Are you sure?', :method => :delete %></td>
