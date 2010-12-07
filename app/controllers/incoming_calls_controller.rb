@@ -74,11 +74,12 @@ class IncomingCallsController < ApplicationController
     end
     
     if game
-      player.game = game
-      logger.info("#{player.game.players.count}")
-      puts "Player count: #{player.game.players.count}"
-      game.player_two = player.id
-      game.start
+      logger.info("Current player count: #{player.game.players.count}")
+      if game.players.count == 1
+        game.player_two = player.id
+        player.game = game
+        game.start
+      end
     else
       game = Game.new
       game.setup
