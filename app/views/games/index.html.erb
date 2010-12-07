@@ -2,11 +2,17 @@
 
 <table border="1" width="100" height="100">
 <% @games.each do |game| %>
+<tr>
+	<td>O's <%= Player.find(game.player_one).phone_number.to_s[7,10] %></td>
+</tr>
   <tr>
 	<td><%= render :partial => 'game', :locals => {:game => game} %></td>
     <!-- <td><%= link_to 'Show', game %></td>
     <td><%= link_to 'Edit', edit_game_path(game) %></td>
     <td><%= link_to 'Destroy', game, :confirm => 'Are you sure?', :method => :delete %></td> -->
   </tr>
+<tr>
+	<td>O's <%= Player.find(game.player_two).phone_number.to_s[7,10] %></td>
+</tr>
 <% end %>
 </table>
