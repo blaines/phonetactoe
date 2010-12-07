@@ -77,7 +77,7 @@ class IncomingCallsController < ApplicationController
     
     if game
       # Add player 2 to game
-      if game.players.count == 1 && !game.players.find(player.id)
+      if game.players.count == 1 && game.players.first.id != player.id
         logger.info("Adding player two to game")
         game.player_two = player.id
         player.game = game
