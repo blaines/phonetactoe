@@ -62,7 +62,7 @@ class IncomingCallsController < ApplicationController
   # POST /incoming_calls
   # POST /incoming_calls.xml
   def create
-
+    logger.info "Incoming call #{params[:From]}"
     player = Player.find_or_create_by(:phone_number => params[:From].to_i)
     player.caller = params[:Caller]
     player.save
@@ -98,7 +98,6 @@ class IncomingCallsController < ApplicationController
 
     respond_to do |format|
       if player.save
-        logger.info "Incoming call received"
         format.xml  { render :xml => verb.response } # , :status => :created
       else
         logger.info "Incoming call error"
