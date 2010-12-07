@@ -13,6 +13,7 @@ class Game
     self.spaces = {"1" => nil, "2" => nil, "3" => nil, "4" => nil, "5" => nil, "6" => nil, "7" => nil, "8" => nil, "9" => nil}
     self.turn = true
     self.purgatory
+    self.next_turn
   end
   
   def space(i)
