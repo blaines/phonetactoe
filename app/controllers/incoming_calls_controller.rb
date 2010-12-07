@@ -94,7 +94,10 @@ class IncomingCallsController < ApplicationController
     end
     game.save
     player.save
-    v.redirect "/games/#{game.id}/gather.xml"
+    
+    verb = Twilio::Verb.new { |v|
+      v.redirect "/games/#{game.id}/gather.xml"
+    }
     
     respond_to do |format|
       if player.save
