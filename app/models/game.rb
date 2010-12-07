@@ -44,6 +44,10 @@ class Game
     self.available = false
   end
   def finish
+    one = self.players.find(self.player_one)
+    one.game = nil
+    two = self.players.find(self.player_two)
+    two.game = nil
     self.active = false
     self.available = false
   end
