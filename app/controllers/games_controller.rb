@@ -78,7 +78,7 @@ class GamesController < ApplicationController
           v.say params["Digits"]
           game.next_turn
         else
-          v.say "Waiting"
+          v.say "Waiting for other player"
           v.pause :length => 2
         end
         
