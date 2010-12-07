@@ -73,11 +73,13 @@ class GamesController < ApplicationController
     player = Player.first(:conditions => {:phone_number => params[:From].to_i})
     game = player.game
     # game = @game = Game.find(params[:id])
-    
+    # http://phonesystem.heroku.com/games
+    verb = Twilio::Verb.new { |v|
+      
     
     if game.over? == false
     
-    verb = Twilio::Verb.new { |v|
+
         if params["Digits"]
           v.say params["Digits"]
           game.next_turn
@@ -112,7 +114,7 @@ class GamesController < ApplicationController
         end
       end
 
-    }
+    
     
     else
     
@@ -122,6 +124,8 @@ class GamesController < ApplicationController
       game.finish
     
     end
+    
+    }
     
     respond_to do |format|
       if game.save
