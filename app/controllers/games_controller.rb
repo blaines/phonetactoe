@@ -79,7 +79,7 @@ class GamesController < ApplicationController
           game.next_turn
         else
           v.say "Waiting"
-          v.pause :length => 5
+          v.pause :length => 2
         end
         
         if (player.id.to_s == game.player_one && game.turn==true) || (player.id.to_s == game.player_two && game.turn==false)
