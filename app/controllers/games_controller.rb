@@ -74,8 +74,13 @@ class GamesController < ApplicationController
     game = player.game
     # game = @game = Game.find(params[:id])
     verb = Twilio::Verb.new { |v|
-          v.say params["Digits"]
+        v.say params["Digits"]
+        v.gather(:action => "/games/#{game.id}/gather.xml", :method => 'POST', :timeout => "90", :numDigits => 1) {
+          v.say 'Pick a position'
+        }
+        v.say "We didn't receive any input. Goodbye!"
     }
+    
     
     if player.id.to_s == game.player_one
       logger.info("Marking for player ONE 111111")
