@@ -68,9 +68,9 @@ class IncomingCallsController < ApplicationController
     player.save
     
     game = Game.first(:conditions => {:available => true})
-    player.game = game
-    game.save
     if game
+      player.game = game
+      game.save
       if game.players.count == 2
         game.player_two = player.id
         game.start
