@@ -78,6 +78,7 @@ class IncomingCallsController < ApplicationController
     else
       game = Game.new
       game.setup
+      player.game = game
       game.player_one = player.id
       game.available = true
     end
