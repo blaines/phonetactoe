@@ -114,6 +114,11 @@ class GamesController < ApplicationController
 
     }
     
+    else
+    
+      v.say "Game Over!"
+      v.hangup
+    
     end
     
     respond_to do |format|
