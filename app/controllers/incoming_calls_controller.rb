@@ -74,13 +74,15 @@ class IncomingCallsController < ApplicationController
     end
     
     if game
-      logger.info("Current player count: #{player.game.players.count}")
       if game.players.count == 1
+        logger.info("Adding player two to game")
         game.player_two = player.id
         player.game = game
         game.start
+        game.save
       end
     else
+      logger.info("Creating new game")
       game = Game.new
       game.setup
       player.game = game
@@ -95,7 +97,7 @@ class IncomingCallsController < ApplicationController
         }
         v.say "We didn't receive any input. Goodbye!"
     }
-
+    logger.info("Current player count: #{game.players.count}")
     respond_to do |format|
       if player.save
         format.xml  { render :xml => verb.response } # , :status => :created
