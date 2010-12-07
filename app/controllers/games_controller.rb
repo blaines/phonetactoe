@@ -89,18 +89,27 @@ class GamesController < ApplicationController
           v.say "We didn't receive any input. Goodbye!"
         else
         v.redirect "/games/#{game.id}/gather.xml"
+      end
+      
+      case
+      when player.id.to_s == game.player_one && params["Digits"]
+        logger.info("Marking for player ONE 111111")
+        if game.spaces[params["Digits"]] == nil
+          game.spaces[params["Digits"]] = true
+        else
+          v.say "Position taken"
         end
+      when player.id.to_s == game.player_two && params["Digits"]
+        logger.info("Marking for player TWO 222222")
+        if game.spaces[params["Digits"]] == nil
+          game.spaces[params["Digits"]] = false
+        else
+          v.say "Position taken"
+        end
+      end
+
     }
     
-    
-    if player.id.to_s == game.player_one && params["Digits"]
-      logger.info("Marking for player ONE 111111")
-      game.spaces[params["Digits"]] = true
-    elsif params["Digits"]
-      logger.info("Marking for player TWO 222222")
-      game.spaces[params["Digits"]] = false
-    end
-
     respond_to do |format|
       if game.save
         logger.info "Game updated"
