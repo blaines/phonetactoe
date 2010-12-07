@@ -67,7 +67,7 @@ class IncomingCallsController < ApplicationController
     player.caller = params[:Caller]
     player.save
     
-    if player.game
+    if player.game && player.game.active
       game = player.game
     else
       game = Game.first(:conditions => {:available => true})
