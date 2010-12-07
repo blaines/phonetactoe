@@ -73,6 +73,8 @@ class IncomingCallsController < ApplicationController
       game = Game.first(:conditions => {:available => true})
     end
     
+    logger.info("Current player count: #{game.players.count}") if game
+    
     if game
       if game.players.count == 1
         logger.info("Adding player two to game")
@@ -97,7 +99,7 @@ class IncomingCallsController < ApplicationController
         }
         v.say "We didn't receive any input. Goodbye!"
     }
-    logger.info("Current player count: #{game.players.count}")
+    
     respond_to do |format|
       if player.save
         format.xml  { render :xml => verb.response } # , :status => :created
