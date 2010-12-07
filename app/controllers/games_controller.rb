@@ -77,9 +77,11 @@ class GamesController < ApplicationController
           v.say params["Digits"]
     }
     
-    game.spaces[params["Digits"]] = true
-    
-    game.spaces[params["Digits"]] = false
+    if player.id == game.player_one
+      game.spaces[params["Digits"]] = true
+    else
+      game.spaces[params["Digits"]] = false
+    end
 
     respond_to do |format|
       if game.save
