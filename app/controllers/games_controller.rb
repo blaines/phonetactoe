@@ -77,7 +77,7 @@ class GamesController < ApplicationController
           v.say params["Digits"]
     }
     
-    if player.id == game.player_one
+    if player.id.to_s == game.player_one
       logger.info("Marking for player ONE 111111")
       game.spaces[params["Digits"]] = true
     else
