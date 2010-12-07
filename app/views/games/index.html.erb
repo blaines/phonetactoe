@@ -1,6 +1,6 @@
 <h1>Twilio Tic Tac Toe</h1>
 
-<table border="1">
+<table border="1" width="100" height="100">
 <% @games.each do |game| %>
   <tr>
 	<td><%= render :partial => 'game', :locals => {:game => game} %></td>
