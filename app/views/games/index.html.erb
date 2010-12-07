@@ -13,7 +13,7 @@
     <td><%= link_to 'Destroy', game, :confirm => 'Are you sure?', :method => :delete %></td> -->
   </tr>
 <tr>
-	<td>O's <%= Player.find(game.player_two).phone_number.to_s[7,10] unless game.player_two.blank? %></td>
+	<td>X's <%= Player.find(game.player_two).phone_number.to_s[7,10] unless game.player_two.blank? %></td>
 </tr>
 <% end %>
 </table>
