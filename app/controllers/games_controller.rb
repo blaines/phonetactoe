@@ -90,7 +90,7 @@ class GamesController < ApplicationController
     if player.id.to_s == game.player_one && params["Digits"]
       logger.info("Marking for player ONE 111111")
       game.spaces[params["Digits"]] = true
-    else
+    elseif params["Digits"]
       logger.info("Marking for player TWO 222222")
       game.spaces[params["Digits"]] = false
     end
