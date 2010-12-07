@@ -83,12 +83,47 @@ class Game
       self.spaces["3"] == false && self.spaces["6"] == false && self.spaces["9"] == false ||
       
       self.spaces["1"] == false && self.spaces["5"] == false && self.spaces["9"] == false ||
-      self.spaces["7"] == false && self.spaces["5"] == false && self.spaces["3"] == false
+      self.spaces["7"] == false && self.spaces["5"] == false && self.spaces["3"] == false ||
+      
+      self.spaces.has_value?(nil) == false
       
       true
     else
       false
     end
+  end
+    
+    def winner?
+      case
+      when
+        self.spaces["1"] == true && self.spaces["2"] == true && self.spaces["3"] == true ||
+        self.spaces["4"] == true && self.spaces["5"] == true && self.spaces["6"] == true ||
+        self.spaces["7"] == true && self.spaces["8"] == true && self.spaces["9"] == true ||
+
+        self.spaces["1"] == true && self.spaces["4"] == true && self.spaces["7"] == true ||
+        self.spaces["2"] == true && self.spaces["5"] == true && self.spaces["8"] == true ||
+        self.spaces["3"] == true && self.spaces["6"] == true && self.spaces["9"] == true ||
+
+        self.spaces["1"] == true && self.spaces["5"] == true && self.spaces["9"] == true ||
+        self.spaces["7"] == true && self.spaces["5"] == true && self.spaces["3"] == true
+        
+        self.players.find(self.player_one)
+      when
+        self.spaces["1"] == false && self.spaces["2"] == false && self.spaces["3"] == false ||
+        self.spaces["4"] == false && self.spaces["5"] == false && self.spaces["6"] == false ||
+        self.spaces["7"] == false && self.spaces["8"] == false && self.spaces["9"] == false ||
+
+        self.spaces["1"] == false && self.spaces["4"] == false && self.spaces["7"] == false ||
+        self.spaces["2"] == false && self.spaces["5"] == false && self.spaces["8"] == false ||
+        self.spaces["3"] == false && self.spaces["6"] == false && self.spaces["9"] == false ||
+
+        self.spaces["1"] == false && self.spaces["5"] == false && self.spaces["9"] == false ||
+        self.spaces["7"] == false && self.spaces["5"] == false && self.spaces["3"] == false
+
+        self.players.find(self.player_two)
+      when self.spaces.has_value?(nil) == false
+        nil
+      end
     
   end
 end

@@ -118,6 +118,8 @@ class GamesController < ApplicationController
     
       v.say "Game Over!"
       v.hangup
+      
+      game.finish
     
     end
     

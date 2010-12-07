@@ -1,3 +1,10 @@
+<% if game.over? %>
+<% if game.winner? %>
+<p><%= game.winner?.phone_number.to_s[7,10] %> Wins!</p>
+<% else %>
+<p>No Winner!</p>
+<% end %>
+<% else %>
 <table>
 	<tr>
 		<td><%= game.space(1) %></td>
@@ -15,3 +22,4 @@
 		<td><%= game.space(9) %></td>
 	</tr>
 </table>
+<% end %>
