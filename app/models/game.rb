@@ -1,11 +1,12 @@
 class Game
   include Mongoid::Document
+  include Mongoid::Timestamps
   field :available, :type => Boolean
   field :active, :type => Boolean
   field :turn, :type => Boolean
   field :spaces, :type => Hash
-  field :player_one
-  field :player_two
+  field :player_one, :type => Integer
+  field :player_two, :type => Integer
   references_many :players
   embeds_many :turns
   
@@ -19,7 +20,7 @@ class Game
   def space(i)
     case self.spaces[i.to_s]
     when nil
-      "-"
+      ""
     when true
       "X"
     when false
@@ -44,13 +45,16 @@ class Game
     self.available = false
   end
   def finish
-    one = self.players.find(self.player_one)
+    one = self.players.first(:conditions => {:phone_number => self.player_one})
     one.game = nil
-    two = self.players.find(self.player_two)
+    two = self.players.first(:conditions => {:phone_number => self.player_two})
     two.game = nil
     self.active = false
     self.available = false
     true
+  end
+  def dead?
+    self.updated_at > Time.now - 5.minutes
   end
   def finished?
     if active && available
@@ -109,7 +113,7 @@ class Game
         self.spaces["1"] == true && self.spaces["5"] == true && self.spaces["9"] == true ||
         self.spaces["7"] == true && self.spaces["5"] == true && self.spaces["3"] == true
         
-        Player.find(self.player_one)
+        self.player_one
       when
         self.spaces["1"] == false && self.spaces["2"] == false && self.spaces["3"] == false ||
         self.spaces["4"] == false && self.spaces["5"] == false && self.spaces["6"] == false ||
@@ -122,7 +126,7 @@ class Game
         self.spaces["1"] == false && self.spaces["5"] == false && self.spaces["9"] == false ||
         self.spaces["7"] == false && self.spaces["5"] == false && self.spaces["3"] == false
 
-        Player.find(self.player_two)
+        self.player_two
       when self.spaces.has_value?(nil) == false
         nil
       end

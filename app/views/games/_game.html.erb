@@ -1,25 +1,27 @@
 <% if game.over? %>
 <% if game.winner? %>
-<p><%= game.winner?.phone_number.to_s[7,10] %> Wins!</p>
+<p class="status"><strong><%= game.winner?.to_s[7,10] %></strong> Wins!</p>
 <% else %>
-<p>No Winner!</p>
+<p class="status">No Winner!</p>
 <% end %>
+<% elsif game.active && game.available %>
+<p class="status">Waiting for another player.</p>
 <% else %>
-<table>
+<table border="0" cellpadding="0" cellspacing="0">
 	<tr>
-		<td><%= game.space(1) %></td>
-		<td><%= game.space(2) %></td>
-		<td><%= game.space(3) %></td>
+		<td class="b-bottom b-right"><%= game.space(1) %></td>
+		<td class="b-bottom b-right"><%= game.space(2) %></td>
+		<td class="b-bottom"><%= game.space(3) %></td>
 	</tr>
 	<tr>
-		<td><%= game.space(4) %></td>
-		<td><%= game.space(5) %></td>
-		<td><%= game.space(6) %></td>
+		<td class="b-bottom b-right"><%= game.space(4) %></td>
+		<td class="b-bottom b-right"><%= game.space(5) %></td>
+		<td class="b-bottom"><%= game.space(6) %></td>
 	</tr>
 	<tr>
-		<td><%= game.space(7) %></td>
-		<td><%= game.space(8) %></td>
-		<td><%= game.space(9) %></td>
+		<td class="b-right"><%= game.space(7) %></td>
+		<td class="b-right"><%= game.space(8) %></td>
+		<td class=""><%= game.space(9) %></td>
 	</tr>
 </table>
 <% end %>

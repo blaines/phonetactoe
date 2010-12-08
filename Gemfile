@@ -6,6 +6,7 @@ gem "mongoid", "2.0.0.beta.20"
 gem "bson_ext", "1.1.2"
 
 gem "twilio"
+gem 'jquery-rails'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

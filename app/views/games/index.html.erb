@@ -1,20 +1,12 @@
-<h1>Twilio Tic Tac Toe</h1>
-<h2>(815) 216-5378</h2>
+<h1>Twilio Tic Tac Toe &bull; (815) 216-5378</h1>
 
 
 <% @games.each do |game| %>
-<table border="1" width="100" height="100" style="float: left">
-<tr>
-	<td>X's <%= Player.find(game.player_one).phone_number.to_s[7,10] unless game.player_two.blank? %></td>
-</tr>
-  <tr>
-	<td><%= render :partial => 'game', :locals => {:game => game} %></td>
-    <!-- <td><%= link_to 'Show', game %></td>
-    <td><%= link_to 'Edit', edit_game_path(game) %></td>
-    <td><%= link_to 'Destroy', game, :confirm => 'Are you sure?', :method => :delete %></td> -->
-  </tr>
-<tr>
-	<td>O's <%= Player.find(game.player_two).phone_number.to_s[7,10] unless game.player_two.blank? %></td>
-</tr>
-</table>
+<div class="game<%= " over" if game.over? %>">
+	<div>
+		<p>X's<br><strong><%= game.player_two.to_s[7,10] unless game.player_one.blank? %></strong></p>
+		<%= render :partial => 'game', :locals => {:game => game} %>
+		<p><strong><%= game.player_one.to_s[7,10] unless game.player_two.blank? %></strong><br>O's</p>
+	</div>
+</div>
 <% end %>

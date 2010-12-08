@@ -2,9 +2,23 @@
 <html>
   <head>
     <title>Cloudstock Hackathon Entry</title>
+	<script src="/javascripts/jquery.js?1291717821" type="text/javascript"></script> 
+	<script src="/javascripts/rails.js?1291717830" type="text/javascript"></script>
+	<link href="/stylesheets/style.css?1291661534" media="screen" rel="stylesheet" type="text/css">
   </head>
   <body>
-	<h1>Cloudstock Hackathon Entry</h1>
-	<p>Dial (815) 216-5378 then continue to <a href="/games">games</a>.</p>
+	<script type="text/javascript">
+	$(function() {
+		refresh();
+	});
+	function refresh(){
+		console.log("Refreshing");
+		$.get('/games', function(data) {
+		  		$('#data').html(data);
+				setTimeout(refresh,2000);
+		});
+	}
+	</script>
+	<span id="data"></span>
   </body>
 </html>

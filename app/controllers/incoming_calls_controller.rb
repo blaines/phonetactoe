@@ -67,7 +67,9 @@ class IncomingCallsController < ApplicationController
     player.caller = params[:Caller]
     player.save
     
-    if player.game && player.game.active
+    if player.game && player.game.active && p.game.dead?
+      Game.any_of({:updated_at.gt => Time.now - 10.minutes, :active => true}, {:updated_at.gt => Time.now - 2.minutes, :active => false})
+      
       game = player.game
     else
       game = Game.first(:conditions => {:available => true})
@@ -79,7 +81,7 @@ class IncomingCallsController < ApplicationController
       # Add player 2 to game
       if game.players.count == 1 && game.players.first.id != player.id
         logger.info("Adding player two to game")
-        game.player_two = player.id
+        game.player_two = player.phone_number
         player.game = game
         game.start
         game.save
@@ -89,7 +91,7 @@ class IncomingCallsController < ApplicationController
       game = Game.new
       game.setup
       player.game = game
-      game.player_one = player.id
+      game.player_one = player.phone_number
       game.available = true
     end
     game.save
