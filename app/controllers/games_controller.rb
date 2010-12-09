@@ -134,11 +134,11 @@ class GamesController < ApplicationController
         
         Twilio.connect('AC1afaeecf73a8e05e32c695eac213226c', '2f4d4a952c4d0bdfa9b9d40266b6b81d')
         if game.winner? === nil
-          Twilio::Sms.message("(815) 216-5378", "+#{person.phone_number}", 'No winner :(')
+          Twilio::Sms.message("(815) 216-5378", "+#{player.phone_number}", 'No winner :(')
         elsif game.winner? == player.phone_number
-          Twilio::Sms.message("(815) 216-5378", "+#{person.phone_number}", 'Congratulations! You Won!')
+          Twilio::Sms.message("(815) 216-5378", "+#{player.phone_number}", 'Congratulations! You Won!')
         else
-          Twilio::Sms.message("(815) 216-5378", "+#{person.phone_number}", 'Play better next time!')
+          Twilio::Sms.message("(815) 216-5378", "+#{player.phone_number}", 'Play better next time!')
         end
                 
         v.hangup
