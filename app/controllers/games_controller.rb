@@ -75,58 +75,67 @@ class GamesController < ApplicationController
     # game = @game = Game.find(params[:id])
     # http://phonesystem.heroku.com/games
     verb = Twilio::Verb.new { |v|
-      
-    
-    if game.over? == false
-    
+
+
+      if game.over? == false
 
         if params["Digits"]
+          state = :digits
+        elsif (player.phone_number == game.player_one && game.turn==true) || (player.phone_number == game.player_two && game.turn==false)
+          state = :turn
+        else
+          state = :wait
+        end
+
+        case state
+        when :digits
+          # digits
           v.say params["Digits"]
           game.next_turn
-        else
-          v.say "Waiting for other player"
-          v.pause :length => 2
-        end
-        
-        if (player.phone_number == game.player_one && game.turn==true) || (player.phone_number == game.player_two && game.turn==false)
+        when :turn
+          # my turn
           v.gather(:action => "/games/#{game.id}/gather.xml", :method => 'POST', :timeout => "90", :numDigits => 1) {
             v.say 'Pick a position'
           }
           v.say "We didn't receive any input. Goodbye!"
-        else
+        when :wait
+          # other turn
+          v.say "Waiting for other player"
+          v.pause :length => 2
+        end
+
         v.redirect "/games/#{game.id}/gather.xml"
-      end
-      
-      case
-      when player.phone_number == game.player_one && params["Digits"]
-        logger.info("Marking for player ONE 111111")
-        if game.spaces[params["Digits"]] == nil
-          game.spaces[params["Digits"]] = true
-        else
-          v.say "Position taken"
+
+        case
+        when player.phone_number == game.player_one && params["Digits"]
+          logger.info("Marking for player ONE 111111")
+          if game.spaces[params["Digits"]] == nil
+            game.spaces[params["Digits"]] = true
+          else
+            v.say "Position taken"
+          end
+        when player.phone_number == game.player_two && params["Digits"]
+          logger.info("Marking for player TWO 222222")
+          if game.spaces[params["Digits"]] == nil
+            game.spaces[params["Digits"]] = false
+          else
+            v.say "Position taken"
+          end
         end
-      when player.phone_number == game.player_two && params["Digits"]
-        logger.info("Marking for player TWO 222222")
-        if game.spaces[params["Digits"]] == nil
-          game.spaces[params["Digits"]] = false
-        else
-          v.say "Position taken"
-        end
+
+
+
+      else
+
+        v.say "Game Over!"
+        v.hangup
+
+        game.finish
+
       end
 
-    
-    
-    else
-    
-      v.say "Game Over!"
-      v.hangup
-      
-      game.finish
-    
-    end
-    
     }
-    
+
     respond_to do |format|
       if game.save
         logger.info "Game updated"
