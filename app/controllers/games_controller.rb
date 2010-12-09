@@ -109,17 +109,17 @@ class GamesController < ApplicationController
           logger.info("Marking for player ONE 111111")
           if game.spaces[params["Digits"]] == nil
             game.spaces[params["Digits"]] = true
+            game.next_turn
           else
             v.say "Position taken"
-            game.next_turn
           end
         when player.phone_number == game.player_two && params["Digits"]
           logger.info("Marking for player TWO 222222")
           if game.spaces[params["Digits"]] == nil
             game.spaces[params["Digits"]] = false
+            game.next_turn
           else
             v.say "Position taken"
-            game.next_turn
           end
         end
 
