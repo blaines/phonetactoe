@@ -92,7 +92,6 @@ class GamesController < ApplicationController
         when :digits
           # digits
           v.say params["Digits"]
-          game.next_turn
         when :turn
           # my turn
           v.gather(:action => "/games/#{game.id}/gather.xml", :method => 'POST', :timeout => "90", :numDigits => 1) {
@@ -104,9 +103,7 @@ class GamesController < ApplicationController
           v.say "Waiting for other player"
           v.pause :length => 2
         end
-
-        v.redirect "/games/#{game.id}/gather.xml"
-
+        
         case
         when player.phone_number == game.player_one && params["Digits"]
           logger.info("Marking for player ONE 111111")
@@ -114,6 +111,7 @@ class GamesController < ApplicationController
             game.spaces[params["Digits"]] = true
           else
             v.say "Position taken"
+            game.next_turn
           end
         when player.phone_number == game.player_two && params["Digits"]
           logger.info("Marking for player TWO 222222")
@@ -121,8 +119,12 @@ class GamesController < ApplicationController
             game.spaces[params["Digits"]] = false
           else
             v.say "Position taken"
+            game.next_turn
           end
         end
+
+        v.redirect "/games/#{game.id}/gather.xml"
+
 
 
 
