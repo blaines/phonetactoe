@@ -8,6 +8,7 @@
   </head>
   <body>
 	<script type="text/javascript">
+	var refreshrate = 2
 	$(function() {
 		refresh();
 	});
@@ -15,7 +16,7 @@
 		console.log("Refreshing");
 		$.get('/games', function(data) {
 		  		$('#data').html(data);
-				setTimeout(refresh,2000);
+				setTimeout(refresh,refreshrate*1000);
 		});
 	}
 	</script>
