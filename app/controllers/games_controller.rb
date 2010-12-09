@@ -88,7 +88,7 @@ class GamesController < ApplicationController
           v.pause :length => 2
         end
         
-        if (player.id.to_s == game.player_one && game.turn==true) || (player.id.to_s == game.player_two && game.turn==false)
+        if (player.phone_number == game.player_one && game.turn==true) || (player.phone_number == game.player_two && game.turn==false)
           v.gather(:action => "/games/#{game.id}/gather.xml", :method => 'POST', :timeout => "90", :numDigits => 1) {
             v.say 'Pick a position'
           }
