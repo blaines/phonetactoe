@@ -98,14 +98,14 @@ class GamesController < ApplicationController
       end
       
       case
-      when player.id.to_s == game.player_one && params["Digits"]
+      when player.phone_number == game.player_one && params["Digits"]
         logger.info("Marking for player ONE 111111")
         if game.spaces[params["Digits"]] == nil
           game.spaces[params["Digits"]] = true
         else
           v.say "Position taken"
         end
-      when player.id.to_s == game.player_two && params["Digits"]
+      when player.phone_number == game.player_two && params["Digits"]
         logger.info("Marking for player TWO 222222")
         if game.spaces[params["Digits"]] == nil
           game.spaces[params["Digits"]] = false
