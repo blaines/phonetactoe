@@ -1,3 +1,6 @@
+h1, .game {
+	-webkit-transition: all 1s ease-in-out;
+}
 body {
 	font-family: sans-serif;
 	background: #F7F7F7;
@@ -34,7 +37,6 @@ td {
 	height: 250px;
 	text-align: center;
 	display: table;
-	-webkit-transition: all 1s ease-in-out;
 }
 .game strong {
 	font-size: 1.2em;
