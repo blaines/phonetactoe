@@ -45,10 +45,6 @@ class Game
     self.available = false
   end
   def finish
-    one = self.players.first(:conditions => {:phone_number => self.player_one})
-    one.game = nil
-    two = self.players.first(:conditions => {:phone_number => self.player_two})
-    two.game = nil
     self.active = false
     self.available = false
     true
