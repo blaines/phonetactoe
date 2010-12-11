@@ -78,6 +78,7 @@ class GamesController < ApplicationController
   
   def gather
     player = Player.first(:conditions => {:phone_number => params[:From].to_i})
+    logger.info "[Application] (#{player.phone_number}) gather"
     game = player.game
     # game = @game = Game.find(params[:id])
     # http://phonesystem.heroku.com/games
