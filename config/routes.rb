@@ -12,7 +12,7 @@ Phonesystem::Application.routes.draw do
   resources :incoming_texts
 
   resources :incoming_calls do
-    member do
+    collection do
       post :hangup
     end
   end
