@@ -63,6 +63,11 @@ td {
 }
 .footer {
 	clear: both;
-	color: #777;
+	color: #000;
 	text-align: center;
+	opacity: .5;
+	font-size: .75em;
+}
+.footer h2 {
+	margin: 3em 0;
 }
