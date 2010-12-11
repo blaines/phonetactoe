@@ -146,7 +146,7 @@ class IncomingCallsController < ApplicationController
       if player.game.active && player.game.available
         player.game.destroy # Unstage
         player.game = nil
-        Twilio::Sms.message("(815) 216-5378", "+#{player.phone_number}", 'Get a friend to join in!')
+        Twilio::Sms.message("(815) 216-5378", "+#{player.phone_number}", 'Get a friend to join in!', 'http://twilio-tic-tac-toe.heroku.com/incoming_texts')
         #  Want a call back when the game is ready? (Yes or No)
       elsif player.game.active && !player.game.available
         player.hungup = true # jerk! :)
