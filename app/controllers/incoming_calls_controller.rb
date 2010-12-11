@@ -150,6 +150,7 @@ class IncomingCallsController < ApplicationController
       elsif player.game.active && !player.game.available
         player.hungup = true # jerk! :)
       end
+      player.save
     end
   end
 
