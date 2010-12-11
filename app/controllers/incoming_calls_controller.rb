@@ -62,7 +62,7 @@ class IncomingCallsController < ApplicationController
   # POST /incoming_calls
   # POST /incoming_calls.xml
   def create
-    logger.info "Incoming call #{params[:From]}"
+    logger.info "[Application] Incoming call #{params[:From]}"
     player = Player.find_or_create_by(:phone_number => params[:From].to_i)
     player.caller = params[:Caller]
     player.save
@@ -75,19 +75,19 @@ class IncomingCallsController < ApplicationController
       game = Game.first(:conditions => {:available => true})
     end
     
-    logger.info("Current player count: #{game.players.count}") if game
+    logger.info("[Application] Current player count: #{game.players.count}") if game
     
     if game
       # Add player 2 to game
       if game.players.count == 1 && game.players.first.id != player.id
-        logger.info("Adding player two to game")
+        logger.info("[Application] Adding player two to game")
         game.player_two = player.phone_number
         player.game = game
         game.start
         game.save
       end
     else
-      logger.info("Creating new game")
+      logger.info("[Application] Creating new game")
       game = Game.new
       game.setup
       player.game = game
@@ -105,7 +105,7 @@ class IncomingCallsController < ApplicationController
       if player.save
         format.xml  { render :xml => verb.response } # , :status => :created
       else
-        logger.info "Incoming call error"
+        logger.info "[Application] Incoming call error"
         format.xml  { render :xml => player.errors, :status => :unprocessable_entity }
       end
     end

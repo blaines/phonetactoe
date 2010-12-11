@@ -110,6 +110,7 @@ class GamesController < ApplicationController
           v.play AudioLoop.first
           # Call players if hungup
           game.players.where(:hungup => true).each do |bad_person|
+            logger.info "[Application] #{bad_person.phone_number} hung up... we're callin em back!"
             Twilio::Call.make("(815) 216-5378", bad_person.phone_number, "http://twilio-tic-tac-toe.heroku.com/incoming_calls.xml")
             bad_person.hungup = false # We don't want to spam them!
           end
@@ -117,7 +118,7 @@ class GamesController < ApplicationController
         
         case
         when player.phone_number == game.player_one && params["Digits"]
-          logger.info("Marking for player ONE 111111")
+          logger.info("[Application] Marking for player ONE 111111")
           if game.spaces[params["Digits"]] == nil
             game.spaces[params["Digits"]] = true
             game.next_turn
@@ -125,7 +126,7 @@ class GamesController < ApplicationController
             v.say "Position taken"
           end
         when player.phone_number == game.player_two && params["Digits"]
-          logger.info("Marking for player TWO 222222")
+          logger.info("[Application] Marking for player TWO 222222")
           if game.spaces[params["Digits"]] == nil
             game.spaces[params["Digits"]] = false
             game.next_turn
@@ -162,11 +163,11 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if game.save
-        logger.info "Game updated"
+        logger.info "[Application] Game updated"
         format.html { redirect_to(@game, :notice => 'Game was successfully updated.') }
         format.xml  { render :xml => verb.response } # , :status => :created
       else
-        logger.info "Game update error"
+        logger.info "[Application] Game update error"
         format.html { render :action => "edit" }
         format.xml  { render :xml => player.errors, :status => :unprocessable_entity }
       end
