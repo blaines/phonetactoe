@@ -114,6 +114,7 @@ class GamesController < ApplicationController
             logger.info "[Application] (#{player.phone_number}) #{bad_person.phone_number} hung up... we're callin em back!"
             Twilio::Call.make("(815) 216-5378", bad_person.phone_number, "http://twilio-tic-tac-toe.heroku.com/incoming_calls.xml")
             bad_person.hungup = false # We don't want to spam them!
+            bad_person.save
           end
         end
         
