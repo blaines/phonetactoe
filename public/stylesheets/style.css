@@ -61,3 +61,7 @@ td {
 .b-right {
 	border-right: 1px solid black;
 }
+.footer {
+	color: #777;
+	text-align: center;
+}
