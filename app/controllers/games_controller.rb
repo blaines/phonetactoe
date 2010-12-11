@@ -1,8 +1,8 @@
 class GamesController < ApplicationController
   
-  AudioLoop = ["http://dl.dropbox.com/u/1157635/Blaine1.m4a",
-  "http://dl.dropbox.com/u/1157635/Blaine2.m4a",
-  "http://dl.dropbox.com/u/1157635/Blaine3.m4a"]
+  AudioLoop = ["http://dl.dropbox.com/u/1157635/Blaine1.mp3",
+  "http://dl.dropbox.com/u/1157635/Blaine2.mp3",
+  "http://dl.dropbox.com/u/1157635/Blaine3.mp3"]
   
   
   # GET /games
