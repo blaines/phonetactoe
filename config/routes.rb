@@ -11,7 +11,11 @@ Phonesystem::Application.routes.draw do
 
   resources :incoming_texts
 
-  resources :incoming_calls
+  resources :incoming_calls do
+    member do
+      post :hangup
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
