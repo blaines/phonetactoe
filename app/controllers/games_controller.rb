@@ -1,4 +1,10 @@
 class GamesController < ApplicationController
+  
+  AudioLoop = ["http://dl.dropbox.com/u/1157635/Blaine1.m4a",
+  "http://dl.dropbox.com/u/1157635/Blaine2.m4a",
+  "http://dl.dropbox.com/u/1157635/Blaine3.m4a"]
+  
+  
   # GET /games
   # GET /games.xml
   def index
@@ -96,12 +102,17 @@ class GamesController < ApplicationController
           # my turn
           v.gather(:action => "/games/#{game.id}/gather.xml", :method => 'POST', :timeout => "90", :numDigits => 1) {
             v.say 'Pick a position'
+            v.play AudioLoop.last
           }
           v.say "We didn't receive any input. Goodbye!"
         when :wait
           # other turn
-          v.say "Waiting for other player"
-          v.pause :length => 2
+          v.play AudioLoop.first
+          # Call players if hungup
+          game.players.where(:hungup => true).each do |bad_person|
+            Twilio::Call.make("(815) 216-5378", bad_person.phone_number, "http://twilio-tic-tac-toe.heroku.com/incoming_calls.xml")
+            bad_person.hungup = false # We don't want to spam them!
+          end
         end
         
         case
