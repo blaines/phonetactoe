@@ -1,4 +1,6 @@
 Phonesystem::Application.routes.draw do
+  map.resources :dtmfs
+  
   resources :turns
 
   resources :players
