@@ -1,5 +1,5 @@
 <Response> 
 	<Play> 
-		http://phonesystem.heroku.com/dtmfs/9.gsm
+		http://phonesystem.heroku.com/dtmf/9.gsm
 	</Play> 
 </Response>
