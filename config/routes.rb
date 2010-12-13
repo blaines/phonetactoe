@@ -1,5 +1,5 @@
 Phonesystem::Application.routes.draw do
-  map.resources :dtmfs
+  resources :dtmfs
   
   resources :turns
 
