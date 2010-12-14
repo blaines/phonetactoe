@@ -1,7 +1,4 @@
 <Response> 
-	<Play> 
-		http://phonesystem.heroku.com/dtmfs/9.gsm
-	</Play>
 	<Play>
 		http://phonesystem.heroku.com/dtmf/9.wav
 	</Play>
