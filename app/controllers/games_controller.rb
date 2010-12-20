@@ -108,6 +108,7 @@ class GamesController < ApplicationController
           v.say "We didn't receive any input. Goodbye!"
         when :wait
           # other turn
+          v.say 'Waiting for other player'
           v.play AudioLoop.first
           # Call players if hungup
           game.players.where(:hungup => true).each do |bad_person|
