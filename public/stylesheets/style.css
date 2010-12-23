@@ -61,13 +61,23 @@ td {
 .b-right {
 	border-right: 1px solid black;
 }
+.header,
 .footer {
 	clear: both;
 	color: #000;
 	text-align: center;
-	opacity: .5;
 	font-size: .75em;
+}
+.header img {
+	position: relative;
+	top: 5px;
+}
+.footer {
+	opacity: .5;
 }
 .footer h2 {
 	margin: 3em 0;
+}
+a, a:link {
+	text-decoration: none;
 }
