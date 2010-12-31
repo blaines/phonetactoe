@@ -1,9 +1,9 @@
 class GamesController < ApplicationController
   
-  AudioLoop = ["http://dl.dropbox.com/u/1157635/Blaine1.mp3",
+  AudioLoop = ["http://dl.dropbox.com/u/1157635/Blaine5.mp3",
   "http://dl.dropbox.com/u/1157635/Blaine1.mp3",
     "http://dl.dropbox.com/u/1157635/Blaine2.mp3",
-    "http://dl.dropbox.com/u/1157635/Blaine5.mp3",
+    "http://dl.dropbox.com/u/1157635/Blaine3.mp3",
     "http://dl.dropbox.com/u/1157635/Blaine4.mp3"]
   
   
