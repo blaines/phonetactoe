@@ -68,7 +68,8 @@ td {
 	text-align: center;
 	font-size: .75em;
 }
-.header img {
+.header img,
+.footer img {
 	position: relative;
 	top: 5px;
 }
