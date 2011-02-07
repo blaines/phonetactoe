@@ -67,9 +67,9 @@ class IncomingCallsController < ApplicationController
     player.caller = params[:Caller]
     player.save
     
-    if player.game && player.game.active && !player.game.dead? && player.hungup
+    if player.game && player.game.active && !player.game.dead?
       # Game.any_of({:updated_at.gt => Time.now - 10.minutes, :active => true}, {:updated_at.gt => Time.now - 2.minutes, :active => false})
-      player.hungup = false
+      # player.hungup = false # This is done when the player is called again
       game = player.game
     else
       game = Game.first(:conditions => {:available => true})
@@ -146,7 +146,7 @@ class IncomingCallsController < ApplicationController
       if player.game && player.game.active && player.game.available
         player.game.destroy # Unstage
         player.game = nil # playing it safe
-        player.game_id = nil # playing it safe
+        # player.game_id = nil # playing it safe
         Twilio.connect('AC1afaeecf73a8e05e32c695eac213226c', '2f4d4a952c4d0bdfa9b9d40266b6b81d')
         Twilio::Sms.message("(815) 216-5378", "+#{player.phone_number}", 'Get a friend to join in!')
         #  Want a call back when the game is ready? (Yes or No)
