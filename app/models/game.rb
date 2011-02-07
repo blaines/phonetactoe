@@ -58,7 +58,7 @@ class Game
     true
   end
   def dead?
-    self.updated_at > Time.now - 5.minutes
+    self.updated_at < Time.now - 5.minutes
   end
   def finished?
     if active && available
