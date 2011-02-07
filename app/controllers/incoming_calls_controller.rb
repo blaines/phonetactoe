@@ -145,7 +145,7 @@ class IncomingCallsController < ApplicationController
       player = Player.find_or_create_by(:phone_number => params[:From].to_i)
       if player.game.active && player.game.available
         player.game.destroy # Unstage
-        player.game = nil
+        player.game_id = nil
         Twilio.connect('AC1afaeecf73a8e05e32c695eac213226c', '2f4d4a952c4d0bdfa9b9d40266b6b81d')
         Twilio::Sms.message("(815) 216-5378", "+#{player.phone_number}", 'Get a friend to join in!')
         #  Want a call back when the game is ready? (Yes or No)
@@ -153,6 +153,9 @@ class IncomingCallsController < ApplicationController
         player.hungup = true # jerk! :)
       end
       player.save
+    end
+    respond_to do |format|
+        format.xml  { head :ok }
     end
   end
 
