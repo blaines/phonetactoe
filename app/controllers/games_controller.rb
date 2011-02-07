@@ -79,7 +79,7 @@ class GamesController < ApplicationController
   end
   
   def gather
-    player = Player.first(:conditions => {:phone_number => params[:From].to_i})
+    player = Player.find_with_params(params)
     logger.info "[Application] (#{player.phone_number}) gather"
     game = player.game
     # game = @game = Game.find(params[:id])
