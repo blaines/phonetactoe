@@ -143,13 +143,14 @@ class IncomingCallsController < ApplicationController
   def hangup
     if params[:From]
       player = Player.find_or_create_by(:phone_number => params[:From].to_i)
-      if player.game.active && player.game.available
+      if player.game && player.game.active && player.game.available
         player.game.destroy # Unstage
-        player.game_id = nil
+        player.game = nil # playing it safe
+        player.game_id = nil # playing it safe
         Twilio.connect('AC1afaeecf73a8e05e32c695eac213226c', '2f4d4a952c4d0bdfa9b9d40266b6b81d')
         Twilio::Sms.message("(815) 216-5378", "+#{player.phone_number}", 'Get a friend to join in!')
         #  Want a call back when the game is ready? (Yes or No)
-      elsif player.game.active && !player.game.available
+      elsif player.game && player.game.active && !player.game.available
         player.hungup = true # jerk! :)
       end
       player.save
