@@ -115,6 +115,7 @@ class GamesController < ApplicationController
           # Call players if hungup
           game.players.where(:hungup => true).each do |bad_person|
             logger.info "[Application] (#{player.phone_number}) #{bad_person.phone_number} hung up... we're callin em back!"
+            Twilio.connect('AC1afaeecf73a8e05e32c695eac213226c', '2f4d4a952c4d0bdfa9b9d40266b6b81d')
             Twilio::Call.make("(815) 216-5378", bad_person.phone_number, "http://twilio-tic-tac-toe.heroku.com/incoming_calls.xml")
             bad_person.hungup = false # We don't want to spam them!
             bad_person.save
