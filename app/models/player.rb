@@ -6,12 +6,12 @@ class Player
   field :hungup, :type => Boolean
   referenced_in :game
   
-  def find_with_params(params)
+  def self.find_with_params(params)
     player_phone_number = parse_player_params(params)
     Player.first(:conditions => {:phone_number => player_phone_number})
   end
   
-  def find_or_create_with_params(params)
+  def self.find_or_create_with_params(params)
     player_phone_number = parse_player_params(params)
     Player.find_or_create_by(:phone_number => player_phone_number)
   end
