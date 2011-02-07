@@ -67,11 +67,19 @@ class IncomingCallsController < ApplicationController
     player.caller = params[:Caller]
     player.save
     
+    logger.info("[Application] Player ID: #{player.id}")
+    logger.info("[Application] Game ID: #{player.game.id}") if player.game
+    logger.info("[Application] Game Active: #{player.game.active}") if player.game
+    logger.info("[Application] Game Dead: #{player.game.dead?}") if player.game
+    
     if player.game && player.game.active && !player.game.dead?
+      
       # Game.any_of({:updated_at.gt => Time.now - 10.minutes, :active => true}, {:updated_at.gt => Time.now - 2.minutes, :active => false})
       # player.hungup = false # This is done when the player is called again
+      logger.info("[Application] Picking player's current game")
       game = player.game
     else
+      logger.info("[Application] Picking first game available")
       game = Game.first(:conditions => {:available => true})
     end
     
