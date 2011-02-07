@@ -67,9 +67,9 @@ class IncomingCallsController < ApplicationController
     player.caller = params[:Caller]
     player.save
     
-    if player.game && player.game.active && !player.game.dead?
-      Game.any_of({:updated_at.gt => Time.now - 10.minutes, :active => true}, {:updated_at.gt => Time.now - 2.minutes, :active => false})
-      
+    if player.game && player.game.active && !player.game.dead? && player.hungup
+      # Game.any_of({:updated_at.gt => Time.now - 10.minutes, :active => true}, {:updated_at.gt => Time.now - 2.minutes, :active => false})
+      player.hungup = false
       game = player.game
     else
       game = Game.first(:conditions => {:available => true})
