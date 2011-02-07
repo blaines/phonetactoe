@@ -11,7 +11,7 @@ class GamesController < ApplicationController
   # GET /games.xml
   def index
     # @games = Game.all
-    @games = Game.any_of({:updated_at.gt => Time.now - 10.minutes, :active => true}, {:updated_at.gt => Time.now - 2.minutes, :active => false})
+    @games = Game.any_of({:updated_at.gt => Time.now - 5.minutes, :active => true}, {:updated_at.gt => Time.now - 2.minutes, :active => false})
 
     respond_to do |format|
       format.html # index.html.erb
