@@ -63,7 +63,14 @@ class IncomingCallsController < ApplicationController
   # POST /incoming_calls.xml
   def create
     logger.info "[Application] Incoming call #{params[:From]}"
-    player = Player.find_or_create_by(:phone_number => params[:From].to_i)
+    incoming_number = params[:From].to_i
+    if incoming_number == 18152165378 # The application phone number
+      player_phone_number == params[:To].to_i
+    else
+      player_phone_number == incoming_number
+    end
+      
+    player = Player.find_or_create_by(:phone_number => player_phone_number)
     player.caller = params[:Caller]
     player.save
     
