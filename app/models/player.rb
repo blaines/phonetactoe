@@ -15,7 +15,7 @@ class Player
     player_phone_number = parse_player_params(params)
     Player.find_or_create_by(:phone_number => player_phone_number)
   end
-  def parse_player_params(params)
+  def self.parse_player_params(params)
     incoming_number = params[:From].to_i
     if incoming_number == 18152165378 # The application phone number
       params[:To].to_i
