@@ -28,6 +28,14 @@ class Game
     end
   end
   
+  def active_player?
+    if self.player_one && self.turn==true
+      self.player_one
+    elsif self.player_two && self.turn==false
+      self.player_two
+    end
+  end
+  
   def next_turn
     if self.turn
       self.turn=false

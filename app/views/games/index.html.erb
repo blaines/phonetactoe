@@ -1,9 +1,10 @@
 <% @games.each do |game| %>
 <div class="game<%= " over" if game.over? %>">
 	<div>
-		<p>X's<br><strong><%= game.player_two.to_s[7,10] unless game.player_one.blank? %></strong></p>
+		<%= content_tag :p, "O's<br><strong>#{game.player_two.to_s[7,10] unless game.player_one.blank?}</strong>".html_safe, :class => "#{'pulsedbox' if game.active_player? == game.player_two && !game.over?}" %>
+		<p></p>
 		<%= render :partial => 'game', :locals => {:game => game} %>
-		<p><strong><%= game.player_one.to_s[7,10] unless game.player_two.blank? %></strong><br>O's</p>
+		<%= content_tag :p, "<strong>#{game.player_one.to_s[7,10] unless game.player_one.blank?}</strong><br>O's".html_safe, :class => "#{'pulsedbox' if game.active_player? == game.player_one && !game.over?}" %>
 	</div>
 </div>
 <% end %>
