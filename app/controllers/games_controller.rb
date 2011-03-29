@@ -123,6 +123,8 @@ class GamesController < ApplicationController
         end
         
         case
+        when params["Digits"] == "0"
+          v.say "What are you doing? Try again!"
         when player.phone_number == game.player_one && params["Digits"]
           logger.info("[Application] (#{player.phone_number}) Marking for player ONE 111111")
           if game.spaces[params["Digits"]] == nil
